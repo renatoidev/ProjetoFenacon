@@ -1,0 +1,8 @@
+D:\Fenacon\ProjFenacon\Dominio\bin\Debug\netcoreapp3.1\Dominio.deps.json
+D:\Fenacon\ProjFenacon\Dominio\bin\Debug\netcoreapp3.1\Dominio.dll
+D:\Fenacon\ProjFenacon\Dominio\bin\Debug\netcoreapp3.1\Dominio.pdb
+D:\Fenacon\ProjFenacon\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfoInputs.cache
+D:\Fenacon\ProjFenacon\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfo.cs
+D:\Fenacon\ProjFenacon\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
+D:\Fenacon\ProjFenacon\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
+D:\Fenacon\ProjFenacon\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb
