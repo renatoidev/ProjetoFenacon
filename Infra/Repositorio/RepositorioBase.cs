@@ -22,12 +22,12 @@ namespace Infra.Repositorio
 
         public void Add(T obj)
         {
-            throw new NotImplementedException();
+            _contexto.Add(obj);
         }
 
         public int SaveChanges()
         {
-            throw new NotImplementedException();
+            return _contexto.SaveChanges();
         }
 
         public List<T> GetAll()

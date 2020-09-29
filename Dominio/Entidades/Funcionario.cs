@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fenacon.Dominio
 {
@@ -11,10 +12,12 @@ namespace Fenacon.Dominio
         public TimeSpan CargaHoraria { get; set; }
         public DateTime DataAdmissao { get; set; }
         public ESituacao Situacao { get; set; }
-        public virtual Supervisor Supervisor { get; set; }
+        public IEnumerable<Funcionario> Supervisores { get; set; }
         public Guid IdSupervisor { get; set; }
+        public virtual Supervisor Supervisor { get; set; }        
         public virtual Ferias Ferias { get; set; }
         public Guid IdFerias { get; set; }
+        
         public Funcionario()
         {
         }
