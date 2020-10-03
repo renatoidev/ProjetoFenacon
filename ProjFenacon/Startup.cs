@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dominio.Interfaces;
 using Fenacon.Dominio.Interfaces;
 using Infra.Contextos;
 using Infra.Repositorio;
@@ -29,10 +30,11 @@ namespace ProjFenacon
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUsuario, RepositorioUsuario>();
             services.AddScoped<IFuncionario, RepositorioFuncionario>();
-            services.AddScoped<IFerias, RepositorioFerias>();
-            services.AddScoped<ISupervisor, RepositorioSupervisor>();
+            services.AddScoped<IGerente, RepositorioGerente>();
+            services.AddScoped<IAnalista, RepositorioAnalista>();
+            services.AddScoped<ITecnico, RepositorioTecnico>();
+            services.AddScoped<IEstagiario, RepositorioEstagiario>();
 
             services.AddControllers();
             services.AddSwaggerGen();

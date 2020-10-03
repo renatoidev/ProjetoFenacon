@@ -1,5 +1,6 @@
-﻿using Fenacon.Dominio;
-using Infra.Mappings;
+﻿using Dominio.Entidades;
+using Fenacon.Dominio;
+using Infra.Mapeamento;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,16 +20,18 @@ namespace Infra.Contextos
         }
 
         public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Ferias> Ferias { get; set; }
-        public DbSet<Supervisor> Supervisores { get; set; }
+        public DbSet<Analista> Analistas { get; set; }
+        public DbSet<Estagiario> Estagiarios { get; set; }
+        public DbSet<Gerente> Gerentes { get; set; }
+        public DbSet<Tecnico> Tecnicos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UsuarioMapping());
-            modelBuilder.ApplyConfiguration(new FuncionarioMapping());
-            modelBuilder.ApplyConfiguration(new FeriasMapping());
-            modelBuilder.ApplyConfiguration(new SupervisorMapping());
+            modelBuilder.ApplyConfiguration(new GerenteMapping());
+            modelBuilder.ApplyConfiguration(new AnalistaMapping());
+            modelBuilder.ApplyConfiguration(new TecnicoMapping());
+            modelBuilder.ApplyConfiguration(new EstagiarioMapping());
 
             base.OnModelCreating(modelBuilder);
         }

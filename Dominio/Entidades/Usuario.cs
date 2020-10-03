@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Fenacon.Dominio
 {
-    public class Usuario : Entity
+    public class Usuario 
     {
         public string Nome { get; set; }
         public string Email { get; set; }

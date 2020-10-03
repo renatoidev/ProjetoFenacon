@@ -1,4 +1,5 @@
-﻿using Fenacon.Dominio;
+﻿using Dominio.Entidades;
+using Fenacon.Dominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +16,6 @@ namespace Dominio.Modelos
         public DateTime DataAdmissao { get; set; } = DateTime.Now;
         public ESituacao Situacao { get; set; } = ESituacao.Ativo;
         public Guid IdSupervisor { get; set; }
-        
+
     }
 }

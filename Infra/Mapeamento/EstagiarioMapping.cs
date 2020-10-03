@@ -1,42 +1,42 @@
-﻿using Fenacon.Dominio;
+﻿using Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
-namespace Infra.Mappings
+namespace Infra.Mapeamento
 {
-    public class FuncionarioMapping : IEntityTypeConfiguration<Funcionario>
+    public class EstagiarioMapping : IEntityTypeConfiguration<Estagiario>
     {
-        public void Configure(EntityTypeBuilder<Funcionario> builder)
+        public void Configure(EntityTypeBuilder<Estagiario> builder)
         {
-            builder.HasKey(x => x.Id);
-            builder.Property(e => e.Id).IsRequired();
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Id)
+                .IsRequired();
 
             builder.Property(e => e.Nome)
-                .HasColumnName("NomeFuncionario")
+                .HasColumnName("NomeEstagiario")
                 .HasColumnType("varchar(40)")
                 .IsRequired();
 
             builder.Property(e => e.Cpf)
-                .HasColumnName("CpfFuncionario")
+                .HasColumnName("CpfEstagiario")
                 .HasColumnType("varchar(11)")
                 .IsRequired();
 
             builder.Property(e => e.Endereco)
-                .HasColumnName("EnderecoFuncionario")
+                .HasColumnName("EnderecoEstagiario")
                 .HasColumnType("varchar(60)")
                 .IsRequired();
 
             builder.Property(e => e.Cargo)
-                .HasColumnName("CargoFuncionario")
+                .HasColumnName("CargoEstagiario")
                 .HasColumnType("int")
                 .IsRequired();
 
-            
+
             builder.Property(e => e.CargaHoraria)
                  .HasColumnName("CargaHoraria")
                  .HasColumnType("time")
@@ -51,18 +51,6 @@ namespace Infra.Mappings
                 .HasColumnName("Situacao")
                 .HasColumnType("int")
                 .IsRequired();
-
-            builder.HasOne(c => c.Supervisor)
-                .WithMany(c => c.Funcionarios)
-                .HasForeignKey(c => c.IdSupervisor);
-
-            builder.HasOne(f => f.Ferias)
-                .WithMany(f => f.Funcionarios)
-                .HasForeignKey(f => f.IdFerias);
-
-
-
-
         }
     }
 }

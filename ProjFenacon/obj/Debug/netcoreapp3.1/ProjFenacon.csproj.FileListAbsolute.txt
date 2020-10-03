@@ -115,7 +115,6 @@ D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.csprojAss
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.AssemblyInfoInputs.cache
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.AssemblyInfo.cs
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.csproj.CoreCompileInputs.cache
-D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.MvcApplicationPartsAssemblyInfo.cs
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.MvcApplicationPartsAssemblyInfo.cache
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.RazorTargetAssemblyInfo.cache
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.csproj.CopyComplete
