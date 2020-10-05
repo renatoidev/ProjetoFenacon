@@ -51,6 +51,9 @@ namespace Infra.Mapeamento
                 .HasColumnName("Situacao")
                 .HasColumnType("int")
                 .IsRequired();
+
+            builder.Property(e => e.IdSupervisor)
+                .HasColumnName("Supervisor");
         }
     }
 }

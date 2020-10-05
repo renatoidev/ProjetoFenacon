@@ -53,9 +53,16 @@ namespace Infra.Mapeamento
                 .HasColumnType("int")
                 .IsRequired();
 
-            builder.HasMany(e => e.Estagiarios);
+            builder.Property(e => e.Supervisor)
+                .HasColumnName("Supervisor");
 
-            builder.HasMany(e => e.Tecnicos);
+            builder.HasMany(e => e.Tecnicos)
+                .WithOne(e => e.Analista)
+                .HasForeignKey(e => e.IdSupervisor);
+
+            builder.HasMany(e => e.Estagiarios)
+                .WithOne(e => e.Analista)
+                .HasForeignKey(e => e.IdSupervisor);
         }
     }
 }

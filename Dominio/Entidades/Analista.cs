@@ -1,6 +1,7 @@
 ﻿using Fenacon.Dominio;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Dominio.Entidades
@@ -8,6 +9,7 @@ namespace Dominio.Entidades
     public class Analista : Funcionario
     {
         public Gerente Supervisor { get; set; }
+        public Guid IdSupervisor { get; set; }
         public IEnumerable<Estagiario> Estagiarios { get; set; }
         public IEnumerable<Tecnico> Tecnicos { get; set; }
 
@@ -16,6 +18,7 @@ namespace Dominio.Entidades
         }
         public Analista(Gerente supervisor) : base() {
             Supervisor = supervisor;
+            IdSupervisor = supervisor.Id;
         }
     }
 }

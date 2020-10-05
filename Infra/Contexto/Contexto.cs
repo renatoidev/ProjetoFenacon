@@ -19,12 +19,10 @@ namespace Infra.Contextos
 
         }
 
-        public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Analista> Analistas { get; set; }
         public DbSet<Estagiario> Estagiarios { get; set; }
         public DbSet<Gerente> Gerentes { get; set; }
         public DbSet<Tecnico> Tecnicos { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {

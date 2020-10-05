@@ -123,3 +123,4 @@ D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\staticwebassets\ProjF
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.dll
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.pdb
 D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.genruntimeconfig.cache
+D:\idev\ProjetoFenacon\ProjFenacon\obj\Debug\netcoreapp3.1\ProjFenacon.MvcApplicationPartsAssemblyInfo.cs

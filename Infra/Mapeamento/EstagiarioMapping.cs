@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace Infra.Mapeamento
 {
@@ -51,6 +53,9 @@ namespace Infra.Mapeamento
                 .HasColumnName("Situacao")
                 .HasColumnType("int")
                 .IsRequired();
+
+            builder.Property(e => e.IdSupervisor)
+                .HasColumnName("Supervisor");
         }
     }
 }
