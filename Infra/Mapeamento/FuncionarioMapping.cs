@@ -1,15 +1,12 @@
-﻿using Dominio.Entidades;
+using Fenacon.Dominio;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infra.Mapeamento
 {
-    public class TecnicoMapping : IEntityTypeConfiguration<Tecnico>
+    public class FuncionarioMapping : IEntityTypeConfiguration<Funcionario>
     {
-        public void Configure(EntityTypeBuilder<Tecnico> builder)
+        public void Configure(EntityTypeBuilder<Funcionario> builder)
         {
             builder.HasKey(e => e.Id);
 
@@ -17,26 +14,26 @@ namespace Infra.Mapeamento
                 .IsRequired();
 
             builder.Property(e => e.Nome)
-                .HasColumnName("NomeTecnico")
+                .HasColumnName("NomeFuncionario")
                 .HasColumnType("varchar(40)")
                 .IsRequired();
 
             builder.Property(e => e.Cpf)
-                .HasColumnName("CpfTecnico")
+                .HasColumnName("CpfFuncionario")
                 .HasColumnType("varchar(11)")
                 .IsRequired();
 
             builder.Property(e => e.Endereco)
-                .HasColumnName("EnderecoTecnico")
+                .HasColumnName("EnderecoFuncionario")
                 .HasColumnType("varchar(60)")
                 .IsRequired();
 
             builder.Property(e => e.Cargo)
-                .HasColumnName("CargoTecnico")
+                .HasColumnName("CargoFuncionario")
                 .HasColumnType("int")
                 .IsRequired();
 
-
+            
             builder.Property(e => e.CargaHoraria)
                  .HasColumnName("CargaHoraria")
                  .HasColumnType("time")
@@ -52,8 +49,9 @@ namespace Infra.Mapeamento
                 .HasColumnType("int")
                 .IsRequired();
 
-            builder.Property(e => e.IdSupervisor)
-                .HasColumnName("Supervisor");
+            builder.HasOne(e => e.Supervisor)
+                .WithMany(e => e.Funcionarios)
+                .HasForeignKey(e => e.IdSupervisor);
         }
     }
 }

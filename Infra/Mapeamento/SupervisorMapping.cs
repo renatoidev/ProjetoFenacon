@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Infra.Mapeamento
 {
-    public class GerenteMapping : IEntityTypeConfiguration<Gerente>
+    class SupervisorMapping : IEntityTypeConfiguration<Supervisor>
     {
-        public void Configure(EntityTypeBuilder<Gerente> builder)
+        public void Configure(EntityTypeBuilder<Supervisor> builder)
         {
             builder.HasKey(e => e.Id);
 
@@ -17,22 +17,22 @@ namespace Infra.Mapeamento
                 .IsRequired();
 
             builder.Property(e => e.Nome)
-                .HasColumnName("NomeGerente")
+                .HasColumnName("NomeSupervisor")
                 .HasColumnType("varchar(40)")
                 .IsRequired();
 
             builder.Property(e => e.Cpf)
-                .HasColumnName("CpfGerente")
+                .HasColumnName("CpfSupervisor")
                 .HasColumnType("varchar(11)")
                 .IsRequired();
 
             builder.Property(e => e.Endereco)
-                .HasColumnName("EnderecoGerente")
+                .HasColumnName("EnderecoSupervisor")
                 .HasColumnType("varchar(60)")
                 .IsRequired();
 
             builder.Property(e => e.Cargo)
-                .HasColumnName("CargoGerente")
+                .HasColumnName("CargoSupervisor")
                 .HasColumnType("int")
                 .IsRequired();
 
@@ -52,8 +52,8 @@ namespace Infra.Mapeamento
                 .HasColumnType("int")
                 .IsRequired();
 
-            builder.HasMany(e => e.Analistas)
-                .WithOne(e => e.Gerente)
+            builder.HasMany(e => e.Funcionarios)
+                .WithOne(e => e.Supervisor)
                 .HasForeignKey(e => e.IdSupervisor);
         }
     }

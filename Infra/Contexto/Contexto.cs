@@ -1,10 +1,6 @@
-﻿using Dominio.Entidades;
-using Fenacon.Dominio;
+﻿using Fenacon.Dominio;
 using Infra.Mapeamento;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Infra.Contextos
 {
@@ -19,17 +15,11 @@ namespace Infra.Contextos
 
         }
 
-        public DbSet<Analista> Analistas { get; set; }
-        public DbSet<Estagiario> Estagiarios { get; set; }
-        public DbSet<Gerente> Gerentes { get; set; }
-        public DbSet<Tecnico> Tecnicos { get; set; }
+        public DbSet<Funcionario> Funcionarios{ get; set; }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new GerenteMapping());
-            modelBuilder.ApplyConfiguration(new AnalistaMapping());
-            modelBuilder.ApplyConfiguration(new TecnicoMapping());
-            modelBuilder.ApplyConfiguration(new EstagiarioMapping());
+            modelBuilder.ApplyConfiguration(new FuncionarioMapping());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,13 +1,11 @@
-﻿using Dominio.Entidades;
-using Fenacon.Dominio;
+﻿using Domain.Entidades;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Interfaces
 {
-    public interface IRepositorio<T>
-         where T : Funcionario
+    public interface IRepositorio<T> 
+         where T : Entity
     {
         void Add(T obj);
         int SaveChanges();

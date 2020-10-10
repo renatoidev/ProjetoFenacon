@@ -1,18 +1,18 @@
 ﻿using Domain.Entidades;
-using Dominio.Entidades;
+using Fenacon.Dominio;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Fenacon.Dominio
+namespace Dominio.Entidades
 {
-    public class Funcionario : Entity
+    public class Supervisor : Entity
     {
-
-        public Funcionario()
+        public Supervisor()
         {
         }
 
-        public Funcionario(string nome, string cpf, string endereco, ECargo cargo, TimeSpan cargaHoraria, DateTime dataAdmissao, ESituacao situacao)
+        public Supervisor(string nome, string cpf, string endereco, ECargo cargo, TimeSpan cargaHoraria, DateTime dataAdmissao, ESituacao situacao)
         {
             Nome = nome;
             Cpf = cpf;
@@ -26,10 +26,10 @@ namespace Fenacon.Dominio
         public string Cpf { get; set; }
         public string Endereco { get; set; }
         public ECargo Cargo { get; set; }
-        public TimeSpan CargaHoraria { get; set; } 
-        public DateTime DataAdmissao { get; set; } 
+        public TimeSpan CargaHoraria { get; set; }
+        public DateTime DataAdmissao { get; set; }
         public ESituacao Situacao { get; set; }
-        public virtual Supervisor Supervisor { get; set; }
-        public Guid IdSupervisor { get; set; }
+        public Guid IdFuncionario { get; set; }
+        public IEnumerable<Funcionario> Funcionarios { get; set; }
     }
 }

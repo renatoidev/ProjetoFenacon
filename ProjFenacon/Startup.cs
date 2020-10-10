@@ -1,20 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Dominio.Interfaces;
 using Fenacon.Dominio.Interfaces;
 using Infra.Contextos;
 using Infra.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace ProjFenacon
 {
@@ -31,10 +23,10 @@ namespace ProjFenacon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IFuncionario, RepositorioFuncionario>();
-            services.AddScoped<IGerente, RepositorioGerente>();
-            services.AddScoped<IAnalista, RepositorioAnalista>();
-            services.AddScoped<ITecnico, RepositorioTecnico>();
-            services.AddScoped<IEstagiario, RepositorioEstagiario>();
+            //services.AddScoped<IGerente, RepositorioGerente>();
+            //services.AddScoped<IAnalista, RepositorioAnalista>();
+            //services.AddScoped<ITecnico, RepositorioTecnico>();
+            //services.AddScoped<IEstagiario, RepositorioEstagiario>();
 
             services.AddControllers();
             services.AddSwaggerGen();

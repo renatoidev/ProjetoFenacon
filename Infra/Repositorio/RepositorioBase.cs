@@ -1,17 +1,15 @@
-﻿using Dominio.Entidades;
-using Fenacon.Dominio;
+﻿using Domain.Entidades;
 using Infra.Contextos;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Infra.Repositorio
 {
     public class RepositorioBase<T> : IRepositorio<T>
-        where T : Funcionario
+        where T : Entity
     {
         private readonly Contexto _contexto;
         protected readonly DbSet<T> DbSet;
@@ -44,7 +42,7 @@ namespace Infra.Repositorio
 
         public T GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return DbSet.Where(x => x.Id == id).FirstOrDefault();
         }
 
         public void Remove(Guid id)
@@ -54,8 +52,12 @@ namespace Infra.Repositorio
 
         public T GetByName(string nome)
         {
-            return DbSet.Where(x => x.Nome == nome)
-                .FirstOrDefault();
+            return default;
+            //return 
+            //    DbSet.Where(x => x.Id == nome)
+            //    .FirstOrDefault();
         }
+
+        
     }
 }
