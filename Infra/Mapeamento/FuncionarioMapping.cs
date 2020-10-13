@@ -36,7 +36,7 @@ namespace Infra.Mapeamento
             
             builder.Property(e => e.CargaHoraria)
                  .HasColumnName("CargaHoraria")
-                 .HasColumnType("time")
+                 .HasColumnType("decimal")
                  .IsRequired();
 
             builder.Property(e => e.DataAdmissao)
@@ -49,9 +49,11 @@ namespace Infra.Mapeamento
                 .HasColumnType("int")
                 .IsRequired();
 
-            builder.HasOne(e => e.Supervisor)
-                .WithMany(e => e.Funcionarios)
-                .HasForeignKey(e => e.IdSupervisor);
+            builder.HasMany(k => k.Funcionarios)
+            .WithOne()
+            .HasForeignKey(k => k.IdSupervisor)
+            .HasPrincipalKey(k => k.Id);
+
         }
     }
 }

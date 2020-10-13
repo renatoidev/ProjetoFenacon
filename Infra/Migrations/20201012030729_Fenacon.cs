@@ -8,25 +8,6 @@ namespace Infra.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Supervisor",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Nome = table.Column<string>(nullable: true),
-                    Cpf = table.Column<string>(nullable: true),
-                    Endereco = table.Column<string>(nullable: true),
-                    Cargo = table.Column<int>(nullable: false),
-                    CargaHoraria = table.Column<TimeSpan>(nullable: false),
-                    DataAdmissao = table.Column<DateTime>(nullable: false),
-                    Situacao = table.Column<int>(nullable: false),
-                    IdFuncionario = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Supervisor", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Funcionarios",
                 columns: table => new
                 {
@@ -35,20 +16,20 @@ namespace Infra.Migrations
                     CpfFuncionario = table.Column<string>(type: "varchar(11)", nullable: false),
                     EnderecoFuncionario = table.Column<string>(type: "varchar(60)", nullable: false),
                     CargoFuncionario = table.Column<int>(type: "int", nullable: false),
-                    CargaHoraria = table.Column<TimeSpan>(type: "time", nullable: false),
+                    CargaHoraria = table.Column<decimal>(type: "decimal", nullable: false),
                     DataAdmissao = table.Column<DateTime>(type: "dateTime", nullable: false),
                     Situacao = table.Column<int>(type: "int", nullable: false),
-                    IdSupervisor = table.Column<Guid>(nullable: false)
+                    IdSupervisor = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Funcionarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Funcionarios_Supervisor_IdSupervisor",
+                        name: "FK_Funcionarios_Funcionarios_IdSupervisor",
                         column: x => x.IdSupervisor,
-                        principalTable: "Supervisor",
+                        principalTable: "Funcionarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -61,9 +42,6 @@ namespace Infra.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Funcionarios");
-
-            migrationBuilder.DropTable(
-                name: "Supervisor");
         }
     }
 }

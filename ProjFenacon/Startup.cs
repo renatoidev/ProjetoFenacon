@@ -23,10 +23,6 @@ namespace ProjFenacon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IFuncionario, RepositorioFuncionario>();
-            //services.AddScoped<IGerente, RepositorioGerente>();
-            //services.AddScoped<IAnalista, RepositorioAnalista>();
-            //services.AddScoped<ITecnico, RepositorioTecnico>();
-            //services.AddScoped<IEstagiario, RepositorioEstagiario>();
 
             services.AddControllers();
             services.AddSwaggerGen();

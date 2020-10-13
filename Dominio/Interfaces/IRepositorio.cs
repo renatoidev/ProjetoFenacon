@@ -10,9 +10,10 @@ namespace Interfaces
         void Add(T obj);
         int SaveChanges();
         List<T> GetAll();
-        List<T> GetAllFerias();
-        T GetById(Guid id);
-        T GetByName(string nome);
+        List<T> GetAllEstagiarios();
+        List<T> GetAllFuncionarios();
+        List<T> GetAllSupervisores();
+        T GetById(Guid? id);
         void Remove(Guid id);
 
     }

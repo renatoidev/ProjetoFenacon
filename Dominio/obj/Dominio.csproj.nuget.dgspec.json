@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\idev\\ProjetoFenacon\\Dominio\\Dominio.csproj": {}
+    "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Dominio\\Dominio.csproj": {}
   },
   "projects": {
-    "D:\\idev\\ProjetoFenacon\\Dominio\\Dominio.csproj": {
+    "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\idev\\ProjetoFenacon\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "D:\\idev\\ProjetoFenacon\\Dominio\\Dominio.csproj",
-        "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
-        "outputPath": "D:\\idev\\ProjetoFenacon\\Dominio\\obj\\",
+        "projectPath": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Dominio\\Dominio.csproj",
+        "packagesPath": "C:\\Users\\jgnet\\.nuget\\packages\\",
+        "outputPath": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jgnet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
