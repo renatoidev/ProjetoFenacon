@@ -1,7 +1,5 @@
 ﻿using Fenacon.Dominio;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Dominio.Modelos
 {
@@ -11,9 +9,9 @@ namespace Dominio.Modelos
         public string Cpf { get; set; }
         public string Endereco { get; set; }
         public ECargo Cargo { get; set; }
-        public decimal CargaHoraria { get; set; } 
-        public DateTime DataAdmissao { get; set; } 
-        public ESituacao Situacao { get; set; } 
-        public Guid IdSupervisor { get; set; }
+        public int CargaHoraria { get; set; }
+        public DateTime DataAdmissao { get; set; } = DateTime.Now.ToLocalTime();
+        public ESituacao Situacao { get; set; } = ESituacao.Ativo;
+        public Guid? SupervisorId { get; set; }
     }
 }

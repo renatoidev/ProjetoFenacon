@@ -1,11 +1,8 @@
-﻿using Dominio.Modelos;
+﻿using System.Linq;
+using Dominio.Modelos;
 using Fenacon.Dominio;
 using Fenacon.Dominio.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ProjFenacon.Controllers
 {
@@ -13,268 +10,174 @@ namespace ProjFenacon.Controllers
     [ApiController]
     public class FuncionarioController : ControllerBase
     {
-        private readonly IFuncionario _funcionarioRepositorio;
-        public FuncionarioController(IFuncionario funcionarioRepositorio) => _funcionarioRepositorio = funcionarioRepositorio;
-
         [HttpPost]
         [Route("cadastrarGerente")]
-        public IActionResult CadastrarGerente(
-            [FromServices] IFuncionario funcionarioRepositorio,
-            [FromBody] CadastrarGerenteModel cadastrarFuncionarioModel)
+        public ActionResult CadastrarGerente(
+            [FromServices] IFuncionario repositorio,
+            [FromBody] CadastrarGerenteModel model)
         {
-
-            if(cadastrarFuncionarioModel.Cargo != ECargo.Gerente) return NotFound();
-            
-            var funcionario = new Funcionario()
+            var gerente = new Funcionario()
             {
-                Nome = cadastrarFuncionarioModel.Nome,
-                CargaHoraria = cadastrarFuncionarioModel.CargaHoraria,
-                Cargo = cadastrarFuncionarioModel.Cargo,
-                Cpf = cadastrarFuncionarioModel.Cpf,
-                DataAdmissao = DateTime.Now.ToLocalTime(),
-                Endereco = cadastrarFuncionarioModel.Endereco,
-                Situacao = cadastrarFuncionarioModel.Situacao,
+                Nome = model.Nome,
+                Cpf = model.Cpf,
+                Endereco = model.Endereco,
+                Cargo = model.Cargo,
+                CargaHoraria = model.CargaHoraria,
+                DataAdmissao = model.DataAdmissao,
+                Situacao = model.Situacao
             };
 
-            funcionarioRepositorio.Add(funcionario);
-            funcionarioRepositorio.SaveChanges();
-            return Ok(funcionario);
+            repositorio.Add(gerente);
+            repositorio.SaveChanges();
+            return Ok(gerente);
         }
 
-        [HttpPost]
-        [Route("cadastrarEstagiário")]
-        public IActionResult CadastrarEstagiario(
-            [FromServices] IFuncionario funcionarioRepositorio,
-            [FromBody] CadastrarFuncionarioModel cadastrarFuncionarioModel)
+        [HttpGet]
+        [Route("listarGerentes")]
+        public ActionResult ListarGerentes(
+            [FromServices] IFuncionario repositorio)
         {
-            if (cadastrarFuncionarioModel.Cargo != ECargo.Estagiario) return NotFound();
+            var funcionarios = repositorio.GetAll().Where(g => g.Cargo == ECargo.Gerente);
+            var subordinados = repositorio.GetAll().Where(a => a.Cargo == ECargo.Analista);
 
-            var funcionario = new Funcionario()
+            var gerentes = funcionarios.Select(g => new ListarGerenteModel
             {
-                Nome = cadastrarFuncionarioModel.Nome,
-                CargaHoraria = cadastrarFuncionarioModel.CargaHoraria,
-                Cargo = cadastrarFuncionarioModel.Cargo,
-                Cpf = cadastrarFuncionarioModel.Cpf,
-                DataAdmissao = DateTime.Now.ToLocalTime(),
-                Endereco = cadastrarFuncionarioModel.Endereco,
-                Situacao = cadastrarFuncionarioModel.Situacao,
-                IdSupervisor = cadastrarFuncionarioModel.IdSupervisor
-            };
+                Nome = g.Nome,
+                Cpf = g.Cpf,
+                Endereco = g.Endereco,
+                Cargo = g.Cargo,
+                CargaHoraria = g.CargaHoraria,
+                DataAdmissao = g.DataAdmissao,
+                Situacao = g.Situacao,
+                Subordinados = subordinados.Select(s => new ListarSubordinadoModel
+                {
+                    Nome = s.Nome,
+                    SupervisorId = s.SupervisorId
+                }).Where(s => s.SupervisorId == g.Id).ToList()
+            }).ToList();
 
-            funcionarioRepositorio.Add(funcionario);
-            funcionarioRepositorio.SaveChanges();
-            return Ok(funcionario);
+            return Ok(gerentes);
         }
 
         [HttpPost]
         [Route("cadastrarAnalista")]
-        public IActionResult CadastrarAnalista(
-           [FromServices] IFuncionario funcionarioRepositorio,
-           [FromBody] CadastrarFuncionarioModel cadastrarFuncionarioModel)
+        public ActionResult CadastrarAnalista(
+            [FromServices] IFuncionario repositorio,
+            [FromBody] CadastrarAnalistaModel model)
         {
-            if (cadastrarFuncionarioModel.Cargo != ECargo.Analista)return NotFound();
+            var supervisor = repositorio.GetById(model.SupervisorId);
 
-            var funcionario = new Funcionario()
+            var analista = new Funcionario()
             {
-                Nome = cadastrarFuncionarioModel.Nome,
-                CargaHoraria = cadastrarFuncionarioModel.CargaHoraria,
-                Cargo = cadastrarFuncionarioModel.Cargo,
-                Cpf = cadastrarFuncionarioModel.Cpf,
-                DataAdmissao = DateTime.Now.ToLocalTime(),
-                Endereco = cadastrarFuncionarioModel.Endereco,
-                Situacao = cadastrarFuncionarioModel.Situacao,
-                IdSupervisor = cadastrarFuncionarioModel.IdSupervisor
+                Nome = model.Nome,
+                Cpf = model.Cpf,
+                Endereco = model.Endereco,
+                Cargo = model.Cargo,
+                CargaHoraria = model.CargaHoraria,
+                DataAdmissao = model.DataAdmissao,
+                Situacao = model.Situacao,
+                Supervisor = supervisor,                
             };
 
-            funcionarioRepositorio.Add(funcionario);
-            funcionarioRepositorio.SaveChanges();
-            return Ok(funcionario);
+            repositorio.Add(analista);
+            repositorio.SaveChanges();
+            return Ok("Analista adicionado com sucesso");
         }
-        
+
+        [HttpGet]
+        [Route("listarAnalistas")]
+        public ActionResult ListarAnalistas(
+            [FromServices] IFuncionario repositorio)
+        {
+            var funcionarios = repositorio.GetAll().Where(a => a.Cargo == ECargo.Analista);
+            var subordinados = repositorio.GetAll().Where(t => t.Cargo == ECargo.Tecnico || t.Cargo == ECargo.Estagiario);
+
+
+            var analistas = funcionarios.Select(a => new ListarAnalistaModel
+            {
+                Nome = a.Nome,
+                Cpf = a.Cpf,
+                Endereco = a.Endereco,
+                Cargo = a.Cargo,
+                CargaHoraria = a.CargaHoraria,
+                DataAdmissao = a.DataAdmissao,
+                Situacao = a.Situacao,
+                Subordinados = subordinados.Select(s => new ListarSubordinadoModel
+                {
+                    Nome = s.Nome,
+                    SupervisorId = s.SupervisorId
+                }).Where(s => s.SupervisorId == a.Id).ToList(),
+                SupervisorId = a.SupervisorId
+            }).ToList();
+
+            return Ok(analistas);
+        }
+
         [HttpPost]
-        [Route("cadastrarTecnico")]
-        public IActionResult CadastrarTecnico(
-           [FromServices] IFuncionario funcionarioRepositorio,
-           [FromBody] CadastrarFuncionarioModel cadastrarFuncionarioModel)
+        [Route("cadastrarFuncionarioComum")]
+        public ActionResult CadastrarFuncionarioComum(
+            [FromServices] IFuncionario repositorio,
+            [FromBody] CadastrarFuncionarioModel model)
         {
-            if (cadastrarFuncionarioModel.Cargo != ECargo.Tecnico) return NotFound();
-
-            var supervisor = funcionarioRepositorio.GetById(cadastrarFuncionarioModel.IdSupervisor);
+            var supervisor = repositorio.GetById(model.SupervisorId);
 
             var funcionario = new Funcionario()
             {
-                Nome = cadastrarFuncionarioModel.Nome,
-                CargaHoraria = cadastrarFuncionarioModel.CargaHoraria,
-                Cargo = cadastrarFuncionarioModel.Cargo,
-                Cpf = cadastrarFuncionarioModel.Cpf,
-                DataAdmissao = DateTime.Now.ToLocalTime(),
-                Endereco = cadastrarFuncionarioModel.Endereco,
-                Situacao = cadastrarFuncionarioModel.Situacao,
-                IdSupervisor = cadastrarFuncionarioModel.IdSupervisor,
-                
+                Nome = model.Nome,
+                Cpf = model.Cpf,
+                Endereco = model.Endereco,
+                Cargo = model.Cargo,
+                CargaHoraria = model.CargaHoraria,
+                DataAdmissao = model.DataAdmissao,
+                Situacao = model.Situacao,
+                Supervisor = supervisor,
             };
 
-            funcionarioRepositorio.Add(funcionario);
-            funcionarioRepositorio.SaveChanges();
-            return Ok(funcionario);
-        }
-        
-        
-        //Listar Funcionarios
-        [HttpGet]
-        [Route("listarEstagiarios")]
-        public IActionResult GetEstagiariosLista([FromServices] IFuncionario repositorio)
-        {
-            var listaFuncionarios = repositorio.GetAllEstagiarios();
-
-            if (listaFuncionarios == null)
-                return default;
-
-            var quantidade = listaFuncionarios.Count();
-
-            var novaLista = listaFuncionarios.Select(x => new EstagiarioListModel
-            {
-                Nome = x.Nome,
-                Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                Cpf = x.Cpf,
-                Endereco = x.Endereco,
-                Situacao = Enum.Parse(typeof(ESituacao), x.Situacao.ToString()).ToString(),
-               Supervisor = new FuncionarioModel
-               {
-                 Nome = x.Funcionarios.FirstOrDefault().Nome,
-                 CargaHoraria = x.Funcionarios.FirstOrDefault().CargaHoraria,
-                 Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                 Cpf = x.Funcionarios.FirstOrDefault().Cpf,
-                 DataAdmissao = x.Funcionarios.FirstOrDefault().DataAdmissao,
-                 Endereco = x.Funcionarios.FirstOrDefault().Endereco,
-                 Situacao = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-
-               }   
-
-            }).ToList();
-
-            return Ok(new
-            {
-                quantidasde = quantidade,
-                lista = novaLista
-            });
+            repositorio.Add(funcionario);
+            repositorio.SaveChanges();
+            return Ok("Funcionário adicionado com sucesso");
         }
 
-
         [HttpGet]
-        [Route("FuncionarioId")]
-        public IActionResult GetFuncionarioPorId([FromServices] IFuncionario repositorio, Guid id)
+        [Route("listarFuncionariosComuns")]
+        public ActionResult ListarFuncionariosComuns(
+            [FromServices] IFuncionario repositorio)
         {
-            var funcionario = repositorio.GetById(id);
+            var funcionarios = repositorio.GetAll().Where(f => f.Cargo == ECargo.Tecnico || f.Cargo == ECargo.Estagiario);
             
-            if (funcionario == null)
-                return default;
-
-            var novoFunc = new FuncionarioModel
+            var estagiariosETecnicos = funcionarios.Select(a => new ListarFuncionarioModel
             {
-                Nome = funcionario.Nome,
-                Cargo = Enum.Parse(typeof(ECargo), funcionario.Cargo.ToString()).ToString(),
-                Cpf = funcionario.Cpf,
-                DataAdmissao = funcionario.DataAdmissao,
-                Endereco = funcionario.Endereco,
-                CargaHoraria = funcionario.CargaHoraria,
-                Situacao = Enum.Parse(typeof(ESituacao), funcionario.Situacao.ToString()).ToString()
-
-            };
-
-            return Ok(new
-            {
-                novoFunc
-            });
-           
-        }
-
-
-
-        [HttpGet]
-        [Route("listarSupervisores")]
-        public IActionResult GetSupervisores([FromServices] IFuncionario repositorio)
-        {
-            var listaFuncionarios = repositorio.GetAllFuncionarios();
-
-            if (listaFuncionarios == null)
-                return default;
-
-            var quantidade = listaFuncionarios.Count();
-
-            var novaLista = listaFuncionarios.Select(x => new FuncionarioListmodel
-            {
-                Nome = x.Nome,
-                Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                Cpf = x.Cpf,
-                Endereco = x.Endereco,
-                Situacao = Enum.Parse(typeof(ESituacao), x.Situacao.ToString()).ToString(),
-                CargaHoraria = x.CargaHoraria,
-                DataAdmissao = DateTime.Now,
-                Supervisor = new FuncModel
-                {
-                    Nome = x.Nome,
-                    Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                }
-
+                Nome = a.Nome,
+                Cpf = a.Cpf,
+                Endereco = a.Endereco,
+                Cargo = a.Cargo,
+                CargaHoraria = a.CargaHoraria,
+                DataAdmissao = a.DataAdmissao,
+                Situacao = a.Situacao,
+                SupervisorId = a.SupervisorId
             }).ToList();
 
-            return Ok(new
-            {
-                quantidasde = quantidade,
-                Funcionarios = novaLista
-            });
+            return Ok(estagiariosETecnicos);
         }
-
-
-
-
-
 
         [HttpGet]
-        [Route("listarFuncionarios")]
-        public IActionResult GetFuncionariosLista([FromServices] IFuncionario repositorio)
+        [Route("listarTodosFuncionarios")]
+        public IActionResult ListarTodosFuncionarios([FromServices] IFuncionario repositorio)
         {
-            var listaFuncionarios = repositorio.GetAllFuncionarios();
-
-            if (listaFuncionarios == null)
-                return default;
-
-            var quantidade = listaFuncionarios.Count();
-
-            var novaLista = listaFuncionarios.Select(x => new FuncionarioListmodel
+            var funcionarios = repositorio.GetAll();
+            var resultado = funcionarios.Select(f => new ListarFuncionarioModel
             {
-                Nome = x.Nome,
-                Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                Cpf = x.Cpf,
-                Endereco = x.Endereco,
-                Situacao = Enum.Parse(typeof(ESituacao), x.Situacao.ToString()).ToString(),
-                CargaHoraria = x.CargaHoraria,
-                DataAdmissao = DateTime.Now,
-                Supervisor = new FuncModel
-                {
-                    Nome = x.Nome,
-                    Cargo = Enum.Parse(typeof(ECargo), x.Cargo.ToString()).ToString(),
-                }
-
+                Nome = f.Nome,
+                Cpf = f.Cpf,
+                Endereco = f.Endereco,
+                Cargo = f.Cargo,
+                CargaHoraria = f.CargaHoraria,
+                DataAdmissao = f.DataAdmissao,
+                Situacao = f.Situacao,
+                SupervisorId = f.SupervisorId
             }).ToList();
 
-            return Ok(new
-            {
-                quantidasde = quantidade,
-                Funcionarios = novaLista
-            });
+            return Ok(resultado);
         }
-
-        //ExcluirFuncionarios
-        [HttpDelete]
-        [Route("excluirFuncionario")]
-        public IActionResult ExcluirFuncionario([FromServices] IFuncionario funcionarioRepositorio, Guid id)
-        {
-            funcionarioRepositorio.Remove(id);
-            funcionarioRepositorio.SaveChanges();
-            return Ok();
-        }
-
     }
 }

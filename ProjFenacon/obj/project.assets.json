@@ -5181,19 +5181,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\jgnet\\.nuget\\packages\\": {}
+    "C:\\Users\\renat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\ProjFenacon\\ProjFenacon.csproj",
+      "projectUniqueName": "D:\\idev\\ProjetoFenacon\\ProjFenacon\\ProjFenacon.csproj",
       "projectName": "ProjFenacon",
-      "projectPath": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\ProjFenacon\\ProjFenacon.csproj",
-      "packagesPath": "C:\\Users\\jgnet\\.nuget\\packages\\",
-      "outputPath": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\ProjFenacon\\obj\\",
+      "projectPath": "D:\\idev\\ProjetoFenacon\\ProjFenacon\\ProjFenacon.csproj",
+      "packagesPath": "C:\\Users\\renat\\.nuget\\packages\\",
+      "outputPath": "D:\\idev\\ProjetoFenacon\\ProjFenacon\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\jgnet\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\renat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5206,8 +5206,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Infra\\Infra.csproj": {
-              "projectPath": "D:\\Projetos-João Garcia\\FenaconRenato\\ProjetoFenacon\\Infra\\Infra.csproj"
+            "D:\\idev\\ProjetoFenacon\\Infra\\Infra.csproj": {
+              "projectPath": "D:\\idev\\ProjetoFenacon\\Infra\\Infra.csproj"
             }
           }
         }
@@ -5250,7 +5250,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

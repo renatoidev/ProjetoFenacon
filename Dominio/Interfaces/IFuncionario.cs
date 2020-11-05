@@ -1,5 +1,4 @@
 ﻿using Interfaces;
-using System.Collections.Generic;
 
 namespace Fenacon.Dominio.Interfaces
 {

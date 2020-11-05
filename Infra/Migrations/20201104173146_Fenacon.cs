@@ -16,26 +16,26 @@ namespace Infra.Migrations
                     CpfFuncionario = table.Column<string>(type: "varchar(11)", nullable: false),
                     EnderecoFuncionario = table.Column<string>(type: "varchar(60)", nullable: false),
                     CargoFuncionario = table.Column<int>(type: "int", nullable: false),
-                    CargaHoraria = table.Column<decimal>(type: "decimal", nullable: false),
+                    CargaHoraria = table.Column<int>(type: "int", nullable: false),
                     DataAdmissao = table.Column<DateTime>(type: "dateTime", nullable: false),
                     Situacao = table.Column<int>(type: "int", nullable: false),
-                    IdSupervisor = table.Column<Guid>(nullable: true)
+                    SupervisorId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Funcionarios", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Funcionarios_Funcionarios_IdSupervisor",
-                        column: x => x.IdSupervisor,
+                        name: "FK_Funcionarios_Funcionarios_SupervisorId",
+                        column: x => x.SupervisorId,
                         principalTable: "Funcionarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Funcionarios_IdSupervisor",
+                name: "IX_Funcionarios_SupervisorId",
                 table: "Funcionarios",
-                column: "IdSupervisor");
+                column: "SupervisorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

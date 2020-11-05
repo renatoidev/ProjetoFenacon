@@ -28,14 +28,5 @@ namespace Infra.Repositorio
             var funcionario = GetById(id);
             DbSet.Remove(funcionario);
         }
-
-        public List<T> GetAllFunc() => DbSet.ToList();
-        public List<T> GetAllEstagiarios() => DbSet.ToList();
-        public List<T> GetAllFuncionarios() => DbSet.ToList();
-
-        public List<T> GetAllSupervisores()
-        {
-            return DbSet.ToList();
-        }
     }
 }

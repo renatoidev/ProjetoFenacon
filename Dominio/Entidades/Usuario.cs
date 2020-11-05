@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Fenacon.Dominio
+﻿namespace Fenacon.Dominio
 {
     public class Usuario 
     {

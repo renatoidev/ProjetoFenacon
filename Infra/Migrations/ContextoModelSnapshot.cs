@@ -25,9 +25,9 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("CargaHoraria")
+                    b.Property<int>("CargaHoraria")
                         .HasColumnName("CargaHoraria")
-                        .HasColumnType("decimal");
+                        .HasColumnType("int");
 
                     b.Property<int>("Cargo")
                         .HasColumnName("CargoFuncionario")
@@ -47,9 +47,6 @@ namespace Infra.Migrations
                         .HasColumnName("EnderecoFuncionario")
                         .HasColumnType("varchar(60)");
 
-                    b.Property<Guid?>("IdSupervisor")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnName("NomeFuncionario")
@@ -59,18 +56,21 @@ namespace Infra.Migrations
                         .HasColumnName("Situacao")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("SupervisorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdSupervisor");
+                    b.HasIndex("SupervisorId");
 
                     b.ToTable("Funcionarios");
                 });
 
             modelBuilder.Entity("Fenacon.Dominio.Funcionario", b =>
                 {
-                    b.HasOne("Fenacon.Dominio.Funcionario", null)
-                        .WithMany("Funcionarios")
-                        .HasForeignKey("IdSupervisor");
+                    b.HasOne("Fenacon.Dominio.Funcionario", "Supervisor")
+                        .WithMany("Subordinados")
+                        .HasForeignKey("SupervisorId");
                 });
 #pragma warning restore 612, 618
         }
